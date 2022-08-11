@@ -1,8 +1,11 @@
 use std::cmp::Ordering;
 use rand::Rng;
+use std::io::stdin;
 use std::io;
 
 fn main() {
+    let mut input = String::with_capacity(100);
+
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1..=100);
@@ -32,7 +35,9 @@ fn main() {
             Ordering::Greater => println!("Guess lower!"),
             Ordering::Equal => {
                 println!("You win! In {attempt} attempts");
-                break;
+                println!("Press [enter] to close");      
+                stdin().read_line(&mut input).unwrap(); 
+                break;                
             }
         }
     }
